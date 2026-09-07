@@ -135,7 +135,6 @@ nav a:hover {
   background-color: var(--accent-neon);
   color: #000;
 }
-
 /* Main Container */
 .container {
   max-width: 1100px;
@@ -240,7 +239,6 @@ nav a:hover {
   padding: 1.5rem;
   text-align: center;
 }
-
 .product-card h3 {
   font-size: 1.1rem;
   color: var(--accent-blue);
