@@ -163,7 +163,6 @@ function updateCartUI() {
   document.getElementById('cart-subtotal').textContent = `$${subtotal.toLocaleString('es-CL')} CLP`;
   document.getElementById('cart-discount').textContent = `-$${discount.toLocaleString('es-CL')} CLP`;
   document.getElementById('cart-total').textContent = `$${total.toLocaleString('es-CL')} CLP`;
-<<<<<<< HEAD
 }
 
 function toggleFavorite(code) {
