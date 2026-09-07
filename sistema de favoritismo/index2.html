@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ranking Gamer | Level-Up</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header class="site-header">
+		<a class="brand" href="../index.html">LEVEL-UP <span>GAMER</span></a>
+		<div class="header-links">
+			<a class="back-link" href="../index.html">Volver a la tienda</a>
+			<span class="period-label">Ranking actualizado: septiembre 2026</span>
+		</div>
+	</header>
+
+	<main class="page-shell">
+		<section class="intro">
+			<p class="eyebrow">Los favoritos de la comunidad</p>
+			<h1>Los juegos que<br><span>todos quieren jugar.</span></h1>
+			<p class="intro-copy">Descubre qué títulos están dominando las ventas de Level-Up Gamer y encuentra tu próxima partida.</p>
+		</section>
+
+		<section class="ranking-panel" aria-label="Ranking de juegos más vendidos">
+			<div class="panel-heading">
+				<div>
+					<h2>Top de ventas</h2>
+					<p id="ranking-summary">Los más comprados por nuestra comunidad</p>
+				</div>
+				<div class="filters" role="group" aria-label="Filtros del ranking">
+					<button class="filter-button active" data-period="month" type="button">Este mes</button>
+					<button class="filter-button" data-period="year" type="button">Este año</button>
+				</div>
+			</div>
+			<div class="category-filter">
+				<label for="platform-filter">Mostrar:</label>
+				<select id="platform-filter">
+					<option value="all">Todas las plataformas</option>
+					<option value="PC">PC</option>
+					<option value="PlayStation">PlayStation</option>
+					<option value="Xbox">Xbox</option>
+					<option value="Nintendo">Nintendo</option>
+				</select>
+			</div>
+			<div id="ranking-list" class="ranking-list" aria-live="polite"></div>
+		</section>
+
+		<section class="stats" aria-label="Resumen de ventas">
+			<div><strong>12.480</strong><span>juegos vendidos este mes</span></div>
+			<div><strong>4,9/5</strong><span>valoracion promedio</span></div>
+			<div><strong>+18%</strong><span>crecimiento mensual</span></div>
+		</section>
+	</main>
+
+	<template id="ranking-template">
+		<article class="ranking-item">
+			<div class="position"></div>
+			<div class="game-cover"><span class="game-initials"></span></div>
+			<div class="game-details">
+				<div class="game-title-row">
+					<h3></h3>
+					<span class="platform"></span>
+				</div>
+				<p class="game-meta"></p>
+				<div class="progress-track"><span class="progress-bar"></span></div>
+			</div>
+			<div class="sales"><strong></strong><span>ventas</span></div>
+		</article>
+	</template>
+
+	<script src="script.js"></script>
+</body>
+</html>
