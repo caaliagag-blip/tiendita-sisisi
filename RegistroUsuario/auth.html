@@ -4,21 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro | Level-Up Gamer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="style.css">
-  
 </head>
 <body>
+
   <header>
     <div class="logo">
       <h1>LEVEL-UP <span>GAMER</span></h1>
     </div>
     <nav>
       <ul>
-        <li><a href="#" id="home-link">Inicio</a></li>
+        <li><a href="../index.html">Inicio</a></li>
         <li><a href="../index.html#catalogo">Catálogo</a></li>
         <li><a href="../index.html#comunidad">Comunidad</a></li>
       </ul>
@@ -26,29 +23,37 @@
   </header>
 
   <main class="container">
-    <!-- Sección Registro movida desde index.html -->
     <section id="registro" class="card-section">
       <h2>Registro de Usuario</h2>
-      <p class="subtitle">Registrate con tu correo <strong>@duocuc.cl</strong> o <strong>@profesor.duoc.cl</strong> para obtener un <strong>20% de descuento de por vida</strong>.</p>
+      <p class="subtitle">
+        Regístrate con tu correo <strong>@duocuc.cl</strong> o <strong>@profesor.duoc.cl</strong> 
+        para obtener un <strong>20% de descuento de por vida</strong>.
+      </p>
+
       <form id="register-form">
         <div class="form-group">
           <label for="reg-name">Nombre Completo:</label>
-          <input type="text" id="reg-name" required placeholder="Tu nombre gamer">
+          <input type="text" id="reg-name" placeholder="Tu nombre gamer" required>
         </div>
+
         <div class="form-group">
           <label for="reg-email">Correo Electrónico:</label>
-          <input type="email" id="reg-email" required placeholder="ejemplo@duocuc.cl">
+          <input type="email" id="reg-email" placeholder="ejemplo@duocuc.cl" required>
         </div>
+
         <div class="form-group">
-          <label for="reg-dob">Fecha de Nacimiento (Debes ser mayor de 18 años):</label>
+          <label for="reg-dob">Fecha de Nacimiento:</label>
           <input type="date" id="reg-dob" required>
         </div>
+
         <div class="form-group">
           <label for="reg-discount">Código de Descuento (Opcional):</label>
           <input type="text" id="reg-discount" placeholder="Ej: DESC2026">
         </div>
+
         <button type="submit" class="btn btn-accent">Registrarse</button>
       </form>
+
       <div id="register-message" class="message"></div>
     </section>
   </main>
@@ -57,30 +62,6 @@
     <p>&copy; 2026 Level-Up Gamer.</p>
   </footer>
 
-  <script src="../pagina/script.js"></script>
-  <script>
-    // Manejador robusto para el enlace "Inicio" que prueba rutas comunes
-    (function(){
-      const home = document.getElementById('home-link');
-      if (!home) return;
-      const candidates = ['../index.html', '../pagina/index.html', '/tiendita-sisisi/index.html'];
-      home.addEventListener('click', (e) => {
-        e.preventDefault();
-        // probar secuencialmente las rutas
-        (async function tryNavigate(list){
-          for (const url of list) {
-            try {
-              const res = await fetch(url, { method: 'HEAD' });
-              if (res && res.ok) { location.href = url; return; }
-            } catch (err) {
-              // ignore y prueba siguiente
-            }
-          }
-          // fallback: intenta navegar a la primera ruta
-          location.href = candidates[0];
-        })(candidates);
-      });
-    })();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
