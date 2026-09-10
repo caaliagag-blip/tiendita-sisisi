@@ -1,75 +1,64 @@
-const rankings = {
-	month: [
-		{ name: 'EA Sports FC 26', platform: 'PlayStation', genre: 'Deportes', sales: 1840, initials: 'FC' },
-		{ name: 'Mario Kart World', platform: 'Nintendo', genre: 'Carreras', sales: 1625, initials: 'MK' },
-		{ name: 'Minecraft', platform: 'Xbox', genre: 'Aventura', sales: 1480, initials: 'MC' },
-		{ name: 'Baldur\'s Gate 3', platform: 'PC', genre: 'RPG', sales: 1290, initials: 'BG' },
-		{ name: 'The Legend of Zelda', platform: 'Nintendo', genre: 'Aventura', sales: 1115, initials: 'ZL' },
-		{ name: 'Elden Ring', platform: 'PlayStation', genre: 'Accion', sales: 980, initials: 'ER' },
-		{ name: 'Forza Horizon 5', platform: 'Xbox', genre: 'Carreras', sales: 840, initials: 'FH' },
-		{ name: 'Stardew Valley', platform: 'PC', genre: 'Simulacion', sales: 720, initials: 'SV' }
-	],
-	year: [
-		{ name: 'Minecraft', platform: 'Xbox', genre: 'Aventura', sales: 16800, initials: 'MC' },
-		{ name: 'EA Sports FC 26', platform: 'PlayStation', genre: 'Deportes', sales: 15400, initials: 'FC' },
-		{ name: 'The Legend of Zelda', platform: 'Nintendo', genre: 'Aventura', sales: 13900, initials: 'ZL' },
-		{ name: 'Baldur\'s Gate 3', platform: 'PC', genre: 'RPG', sales: 12100, initials: 'BG' },
-		{ name: 'Elden Ring', platform: 'PlayStation', genre: 'Accion', sales: 10900, initials: 'ER' },
-		{ name: 'Mario Kart World', platform: 'Nintendo', genre: 'Carreras', sales: 10200, initials: 'MK' },
-		{ name: 'Forza Horizon 5', platform: 'Xbox', genre: 'Carreras', sales: 8900, initials: 'FH' },
-		{ name: 'Stardew Valley', platform: 'PC', genre: 'Simulacion', sales: 7400, initials: 'SV' }
-	]
-};
+const products = [
+	{ code: 'JM001', category: 'Juegos de Mesa', name: 'Catan', price: 29990, desc: 'Un clásico juego de estrategia donde los jugadores compiten por colonizar la isla de Catan.' },
+	{ code: 'JM002', category: 'Juegos de Mesa', name: 'Carcassonne', price: 24990, desc: 'Un juego de colocación de fichas donde los jugadores construyen el paisaje medieval.' },
+	{ code: 'AC001', category: 'Accesorios', name: 'Controlador Inalámbrico Xbox Series X', price: 59990, desc: 'Ofrece experiencia cómoda con botones mapeables y respuesta táctil mejorada.' },
+	{ code: 'AC002', category: 'Accesorios', name: 'Auriculares Gamer HyperX Cloud II', price: 79990, desc: 'Sonido envolvente de calidad con micrófono desmontable y almohadillas confortables.' },
+	{ code: 'CO001', category: 'Consolas', name: 'PlayStation 5', price: 549990, desc: 'Consola de última generación de Sony con gráficos impresionantes y carga ultrarrápida.' },
+	{ code: 'CG001', category: 'Computadores Gamers', name: 'PC Gamer ASUS ROG Strix', price: 1299990, desc: 'Potente equipo para gamers exigentes equipado con los últimos componentes.' },
+	{ code: 'SG001', category: 'Sillas Gamers', name: 'Silla Gamer Secretlab Titan', price: 349990, desc: 'Máximo confort y soporte ergonómico para largas sesiones de juego.' },
+	{ code: 'MS001', category: 'Mouse', name: 'Mouse Gamer Logitech G502 HERO', price: 49990, desc: 'Sensor de alta precisión y botones personalizables para un control exacto.' },
+	{ code: 'MP001', category: 'Mousepad', name: 'Mousepad Razer Goliathus Extended Chroma', price: 29990, desc: 'Área de juego amplia con iluminación RGB personalizable.' },
+	{ code: 'PP001', category: 'Poleras Personalizadas', name: 'Polera Gamer Personalizada Level-Up', price: 149990, desc: 'Camiseta cómoda con opción de personalización con tu Gamer Tag.' }
+];
 
-let selectedPeriod = 'month';
-const rankingList = document.getElementById('ranking-list');
-const platformFilter = document.getElementById('platform-filter');
-const template = document.getElementById('ranking-template');
+const favoritesList = document.getElementById('favorites-list');
+const favoritesSummary = document.getElementById('favorites-summary');
 
-function formatSales(sales) {
-	return sales.toLocaleString('es-CL');
+function getFavoriteCodes() {
+	try {
+		return JSON.parse(localStorage.getItem('level-up-favoritos') || '[]');
+	} catch {
+		return [];
+	}
 }
 
-function renderRanking() {
-	const platform = platformFilter.value;
-	const games = rankings[selectedPeriod].filter((game) => platform === 'all' || game.platform === platform);
-	const highestSales = rankings[selectedPeriod][0].sales;
+function formatPrice(price) {
+	return `$${price.toLocaleString('es-CL')} CLP`;
+}
 
-	rankingList.innerHTML = '';
-	if (games.length === 0) {
-		rankingList.innerHTML = '<p class="empty-ranking">No hay juegos para esta plataforma.</p>';
+function renderFavorites() {
+	const favoriteCodes = getFavoriteCodes();
+	const favorites = products.filter((product) => favoriteCodes.includes(product.code));
+	favoritesList.innerHTML = '';
+	favoritesSummary.textContent = `${favorites.length} ${favorites.length === 1 ? 'producto guardado' : 'productos guardados'}`;
+
+	if (favorites.length === 0) {
+		favoritesList.innerHTML = '<p class="empty-ranking">Todavía no tienes productos favoritos. Guarda alguno desde el catálogo.</p>';
 		return;
 	}
 
-	games.forEach((game, index) => {
-		const item = template.content.cloneNode(true);
-		const position = index + 1;
-		const positionElement = item.querySelector('.position');
-		positionElement.textContent = position < 4 ? ['01', '02', '03'][index] : position;
-		positionElement.classList.toggle('podium', position < 4);
-		item.querySelector('.game-cover').classList.add(`cover-${position}`);
-		item.querySelector('.game-initials').textContent = game.initials;
-		item.querySelector('h3').textContent = game.name;
-		item.querySelector('.platform').textContent = game.platform;
-		item.querySelector('.game-meta').textContent = game.genre;
-		item.querySelector('.sales strong').textContent = formatSales(game.sales);
-		item.querySelector('.progress-bar').style.width = `${Math.round((game.sales / highestSales) * 100)}%`;
-		rankingList.appendChild(item);
+	favorites.forEach((product) => {
+		const item = document.createElement('article');
+		item.className = 'favorite-item';
+		item.innerHTML = `
+			<div class="favorite-details">
+				<span class="favorite-category">${product.category}</span>
+				<h3>${product.name}</h3>
+				<p>${product.desc}</p>
+				<strong>${formatPrice(product.price)}</strong>
+			</div>
+			<button class="remove-favorite" type="button" aria-label="Quitar ${product.name} de favoritos">Quitar</button>
+		`;
+		item.querySelector('.remove-favorite').addEventListener('click', () => removeFavorite(product.code));
+		favoritesList.appendChild(item);
 	});
-
-	document.getElementById('ranking-summary').textContent = selectedPeriod === 'month'
-		? 'Los mas comprados durante este mes'
-		: 'Los mas comprados durante este ano';
 }
 
-document.querySelectorAll('.filter-button').forEach((button) => {
-	button.addEventListener('click', () => {
-		selectedPeriod = button.dataset.period;
-		document.querySelectorAll('.filter-button').forEach((filter) => filter.classList.remove('active'));
-		button.classList.add('active');
-		renderRanking();
-	});
-});
+function removeFavorite(code) {
+	const favoriteCodes = getFavoriteCodes().filter((favoriteCode) => favoriteCode !== code);
+	localStorage.setItem('level-up-favoritos', JSON.stringify(favoriteCodes));
+	renderFavorites();
+}
 
-platformFilter.addEventListener('change', renderRanking);
-renderRanking();
+window.addEventListener('storage', renderFavorites);
+renderFavorites();

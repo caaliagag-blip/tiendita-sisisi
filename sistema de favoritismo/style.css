@@ -38,6 +38,16 @@ h2 { font-size: 26px; margin: 0 0 7px; }
 select { background: var(--white); border: 1px solid var(--line); border-radius: 3px; color: var(--ink); font-size: 12px; padding: 8px 30px 8px 10px; }
 
 .ranking-list { margin-top: 12px; }
+.favorites-list { margin-top: 12px; }
+.favorite-item { align-items: center; border-bottom: 1px solid var(--line); display: flex; gap: 24px; justify-content: space-between; padding: 22px 0; }
+.favorite-item:last-child { border-bottom: 0; }
+.favorite-details { min-width: 0; }
+.favorite-category { color: var(--coral); font: 700 10px Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.favorite-item h3 { font-size: 20px; margin: 7px 0; }
+.favorite-item p { color: var(--muted); font: 14px Arial, sans-serif; line-height: 1.5; margin: 0 0 10px; }
+.favorite-item strong { font: 700 15px Arial, sans-serif; }
+.remove-favorite, .back-to-catalog { background: transparent; border: 1px solid var(--coral); border-radius: 3px; color: var(--coral); font: 700 12px Arial, sans-serif; padding: 9px 12px; text-decoration: none; white-space: nowrap; }
+.remove-favorite:hover, .back-to-catalog:hover { background: var(--coral); color: var(--white); }
 .ranking-item { align-items: center; border-bottom: 1px solid var(--line); display: grid; gap: 18px; grid-template-columns: 38px 60px 1fr 80px; padding: 16px 0; }
 .ranking-item:last-child { border-bottom: 0; }
 .position { color: var(--muted); font: 700 16px Arial, sans-serif; text-align: center; }
@@ -54,6 +64,7 @@ select { background: var(--white); border: 1px solid var(--line); border-radius:
 .progress-bar { background: var(--coral); display: block; height: 100%; transition: width .35s ease; }
 .sales { text-align: right; }.sales strong { display: block; font: 700 16px Arial, sans-serif; }.sales span { color: var(--muted); font: 10px Arial, sans-serif; }
 .empty-ranking { color: var(--muted); padding: 30px; text-align: center; }
+.favorites-actions { margin-top: 30px; text-align: center; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 30px; }
 .stats div { border-right: 1px solid var(--line); padding: 5px 25px; }.stats div:last-child { border-right: 0; }.stats strong { display: block; font: 700 24px Arial, sans-serif; }.stats span { color: var(--muted); font: 11px Arial, sans-serif; }
 
@@ -62,6 +73,7 @@ select { background: var(--white); border: 1px solid var(--line); border-radius:
 	.page-shell { padding: 52px 17px 70px; }
 	.ranking-panel { margin-top: 45px; padding: 24px 16px; }
 	.panel-heading { gap: 18px; flex-direction: column; }.category-filter { justify-content: flex-start; }
+	.favorite-item { align-items: flex-start; flex-direction: column; gap: 14px; }
 	.ranking-item { gap: 10px; grid-template-columns: 28px 48px 1fr; }.game-cover { height: 48px; }.sales { grid-column: 3; text-align: left; }.progress-track { margin-top: 8px; }
 	.stats { gap: 12px; grid-template-columns: 1fr; }.stats div { border-bottom: 1px solid var(--line); border-right: 0; padding: 10px 0; }.stats div:last-child { border-bottom: 0; }
 }

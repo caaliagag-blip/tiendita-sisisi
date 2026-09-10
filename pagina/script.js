@@ -14,7 +14,6 @@ const products = [
 
 let cart = [];
 let hasDuocDiscount = localStorage.getItem('level-up-duoc') === '1';
-let showingFavorites = false;
 let favoriteCodes = JSON.parse(localStorage.getItem('level-up-favoritos') || '[]');
 
 // Cargar productos al iniciar
@@ -28,12 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const categoryFilter = document.getElementById('category-filter');
   if (categoryFilter) categoryFilter.addEventListener('change', filterProducts);
-
-  const favoritesFilter = document.getElementById('favorites-filter');
-  if (favoritesFilter) favoritesFilter.addEventListener('click', toggleFavoritesView);
-
-  const favoritesToggle = document.getElementById('favorites-toggle');
-  if (favoritesToggle) favoritesToggle.addEventListener('click', showFavoritesView);
 
   // Event Listener Formulario (solo si existe)
   const registerForm = document.getElementById('register-form');
@@ -52,9 +45,7 @@ function renderProducts(items) {
 
   if (items.length === 0) {
     emptyMessage.hidden = false;
-    emptyMessage.textContent = showingFavorites
-      ? 'No tienes productos favoritos todavía.'
-      : 'No se encontraron productos.';
+    emptyMessage.textContent = 'No se encontraron productos.';
     return;
   }
 
@@ -87,8 +78,7 @@ function filterProducts() {
   const filtered = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(query) || product.desc.toLowerCase().includes(query);
     const matchesCategory = category === 'all' || product.category === category;
-    const matchesFavorites = !showingFavorites || favoriteCodes.includes(product.code);
-    return matchesSearch && matchesCategory && matchesFavorites;
+    return matchesSearch && matchesCategory;
   });
 
   renderProducts(filtered);
@@ -196,20 +186,4 @@ function toggleFavorite(code) {
 function updateFavoriteCount() {
   const el = document.getElementById('favorite-count');
   if (el) el.textContent = favoriteCodes.length;
-}
-
-function toggleFavoritesView() {
-  showingFavorites = !showingFavorites;
-  const button = document.getElementById('favorites-filter');
-  button.textContent = showingFavorites ? '♡ Ver todo el catálogo' : '♡ Ver favoritos';
-  button.classList.toggle('active', showingFavorites);
-  filterProducts();
-}
-
-function showFavoritesView(event) {
-  event.preventDefault();
-  if (!showingFavorites) {
-    toggleFavoritesView();
-  }
-  document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
 }

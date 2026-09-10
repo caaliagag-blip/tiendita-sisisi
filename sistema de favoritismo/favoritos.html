@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mis favoritos | Level-Up</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header class="site-header">
+		<a class="brand" href="../pagina/index.html">LEVEL-UP <span>GAMER</span></a>
+		<div class="header-links">
+			<a class="back-link" href="../pagina/index.html">Volver a la tienda</a>
+			<span class="period-label">Tu selección personal</span>
+		</div>
+	</header>
+
+	<main class="page-shell">
+		<section class="intro">
+			<p class="eyebrow">Tu colección guardada</p>
+			<h1>Tus productos<br><span>favoritos.</span></h1>
+			<p class="intro-copy">Aquí encontrarás los productos que guardaste desde el catálogo de Level-Up Gamer.</p>
+		</section>
+
+		<section class="ranking-panel" aria-label="Productos favoritos">
+			<div class="panel-heading">
+				<div>
+					<h2>Mis favoritos</h2>
+					<p id="favorites-summary">0 productos guardados</p>
+				</div>
+			</div>
+			<div id="favorites-list" class="favorites-list" aria-live="polite"></div>
+		</section>
+
+		<section class="favorites-actions" aria-label="Acciones de favoritos">
+			<a class="back-to-catalog" href="../pagina/index.html#catalogo">Explorar el catálogo</a>
+		</section>
+	</main>
+
+	<script src="script.js"></script>
+</body>
+</html>
